@@ -40,50 +40,6 @@ public class AuthorizationController {
 }
 
 
-// package com.example.SpringBoot.controller;
-
-// import org.springframework.beans.factory.annotation.Value;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.RestController;
-// import org.springframework.web.servlet.view.RedirectView;
-
-// import jakarta.servlet.http.HttpSession;
-// import java.security.SecureRandom;
-// import java.math.BigInteger;
-
-// @RestController
-// public class AuthorizationController {
-
-//     @Value("${okta.client-id}")
-//     private String clientId;
-
-//     @Value("${okta.redirect-uri}")
-//     private String redirectUri;
-
-//     @Value("${okta.authorization-uri}")
-//     private String authorizationUri;
-
-//     @GetMapping("/login")
-//     public RedirectView login(HttpSession session) {
-//         // Generate a unique state parameter
-//         String state = generateStateParameter();
-//         session.setAttribute("oauth_state", state);
-
-//         String authorizationUrl = authorizationUri + "?response_type=code" +
-//             "&client_id=" + clientId +
-//             "&redirect_uri=" + redirectUri +
-//             "&scope=openid profile email" +
-//             "&state=" + state;
-
-//         return new RedirectView(authorizationUrl);
-//     }
-
-//     private String generateStateParameter() {
-//         SecureRandom random = new SecureRandom();
-//         return new BigInteger(130, random).toString(32);
-//     }
-// }
-
 
 
 
