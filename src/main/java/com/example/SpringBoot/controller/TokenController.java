@@ -1,5 +1,7 @@
 package com.example.SpringBoot.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -48,8 +50,11 @@ public class TokenController {
             );
 
             // Parse the response
-            // Here you could parse the response to get the tokens if needed
-            return "Authorization Code: " + code;
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonResponse = objectMapper.readTree(response.getBody());
+            String idToken = jsonResponse.path("id_token").asText();
+            // Optionally, store the ID token or process it further
+            return "Authorization Code received: " + code + "<br/>ID Token obtained: " + idToken;
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
@@ -59,8 +64,6 @@ public class TokenController {
 
 // package com.example.SpringBoot.controller;
 
-// import com.fasterxml.jackson.databind.JsonNode;
-// import com.fasterxml.jackson.databind.ObjectMapper;
 // import org.springframework.beans.factory.annotation.Value;
 // import org.springframework.http.HttpHeaders;
 // import org.springframework.http.HttpMethod;
@@ -86,7 +89,7 @@ public class TokenController {
 //     private String redirectUri;
 
 //     @GetMapping("/authorization-code/callback")
-//     public String callback(@RequestParam("code") String code) {
+//     public String callback(@RequestParam("code") String code, @RequestParam("state") String state) {
 //         try {
 //             RestTemplate restTemplate = new RestTemplate();
 
@@ -109,12 +112,8 @@ public class TokenController {
 //             );
 
 //             // Parse the response
-//             ObjectMapper objectMapper = new ObjectMapper();
-//             JsonNode jsonResponse = objectMapper.readTree(response.getBody());
-//             String idToken = jsonResponse.path("id_token").asText();
-//             String accessToken = jsonResponse.path("access_token").asText();
-            
-//             return "ID Token: " + idToken + "<br/>Access Token: " + accessToken;
+//             // Here you could parse the response to get the tokens if needed
+//             return "Authorization Code: " + code;
 //         } catch (Exception e) {
 //             return "Error: " + e.getMessage();
 //         }
