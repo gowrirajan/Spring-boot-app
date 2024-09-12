@@ -38,10 +38,3 @@ public class AuthorizationController {
         return new RedirectView(authorizationUrl);
     }
 }
-
-
-
-
-
-
-
