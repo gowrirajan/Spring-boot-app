@@ -54,7 +54,7 @@ public class TokenController {
             JsonNode jsonResponse = objectMapper.readTree(response.getBody());
             String idToken = jsonResponse.path("id_token").asText();
             // Optionally, store the ID token or process it further
-            return "Authorization Code received: " + code + "<br/>ID Token obtained: " + idToken;
+            return idToken;
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
